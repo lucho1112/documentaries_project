@@ -8,8 +8,7 @@ import { Pagination } from './Pagination';
 import { Link } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import { DocCardPage } from './DocCardPage';
-import { DocType } from './DocType';
-import { DocList } from './DocList';
+import { MainPage } from './MainPage';
 
 
 // define a fn to clean dirtyData to cleanData; ie add id + slug
@@ -29,49 +28,13 @@ const serializeData = function(dirtyData) {
 const data = serializeData(dirtyData);
 
 const uniqueItems = (x, i, a) => a.indexOf(x) === i;
-const MOVIE_CATEGORIES = data.map(prod => prod.genre).filter(
+const movieCategories = data.map(prod => prod.genre).filter(
   uniqueItems
 );
 
-
-class ButtonCategory extends Component {
-  render () {
-      return (
-        MOVIE_CATEGORIES.map((category,i) => {
-          return <button onClick={this.props.onClick} category={category}>{category}</button>
-        }
-      )
-    )
-  }
-};
-
-
-class Main extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      displayCategory: 'All',
-      movieCategories: MOVIE_CATEGORIES
-    };
-    this.setCategory = this.setCategory.bind(this);
-  }
-  setCategory(category) {
-    this.setState({
-      displayCategory: category
-    });
-  }
-
-  render () {
-
-    return (
-      <div>
-      <ButtonCategory onClick={this.setCategory} />
-      <DocList movies={data}  setCategory={this.setCategory} state={this.state} />
-    </div>
-    );
-  }
-};
-
+const MyMainPage = (props) => (
+  <MainPage movies={data} categories={movieCategories}/>
+)
 const MyDocCardPage = (props) => (
   <DocCardPage {...props} movies={data} />
 );
@@ -82,7 +45,7 @@ export class App extends Component {
       <Switch>
         <Route
           exact path='/'
-          component={Main}
+          children={MyMainPage}
         />
         <Route
           path='/movie/:i'

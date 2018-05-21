@@ -12,7 +12,7 @@ export function DocCard(props) {
         genre={elt.genre}
         className= "card-type"
       />
-      <Link to={`/movie/${i}`}>
+      <Link to={`/movie/${elt.id}`}>
         <h2 className="card-title">{elt.topic}</h2>
       </Link>
       <div className= "card-id">
