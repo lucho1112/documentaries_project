@@ -7,7 +7,7 @@ export class DocType extends Component {
     if (this.props.genre === 'Documentaire') {
       var genreOf = 'red';
     } else {
-      var genreOf = 'blue';
+      genreOf = 'blue';
     };
     const styles = {
       backgroundColor: genreOf

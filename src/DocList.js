@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { DocType } from './DocType';
 import { DocCard } from './DocCard';
 
 export class DocList extends Component {
@@ -24,7 +22,6 @@ export class DocList extends Component {
         );
       }
     );
-
     return (
       <div>
         <input
@@ -33,7 +30,16 @@ export class DocList extends Component {
           onChange={this.updateSearch.bind(this)}
         />
         {
-          filtered.map((elt,i) => <DocCard i={i} elt={elt} /> )
+          filtered
+          .filter(
+             (elt,i) => {
+               return (
+                 this.props.state.displayCategory === elt.genre || this.props.state.displayCategory === "All"
+               )
+             }
+          )
+          .map((elt,i) => <DocCard i={i} elt={elt} /> )
+
         }
       </div>
     )

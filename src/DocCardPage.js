@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import data from './data.json';
 import './App.css';
-import { Link } from 'react-router-dom'
 import { DocType } from './DocType';
 import { DocVideo } from './DocVideo';
 
@@ -45,49 +43,4 @@ export class DocCardPage extends Component {
   )
   )
   }
-
-
-/*
-  render () {
-    const movies = data.map( (movies) => {
-    parseInt(props.match.params.topic, 10) }
-  )
-  if (!movies) {
-    return <div>Sorry, but the player was not found</div>
-  }
-    return (
-      <div>
-          <DocType
-            genre={data.genre}
-            className= "card-type"
-          />
-
-            <DocTitle
-
-              title={data.topic}
-              className= "card-title"
-            />
-
-
-          <DocIDCard
-            category={data.category}
-            year={data.year}
-
-            duration={data.duration}
-            className= "card-id"
-          />
-          <DocSum
-
-            plot={data.plot}
-            className= "card-sum"
-          />
-          <DocTags
-
-            tags={data.subcategory}
-            className= "card-tags"
-          />
-      </div>
-    );
-  }
-*/
 }

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 /*import logo from './logo.svg';*/
 import './App.css';
 import dirtyData from './data.json';
-import { Pagination } from './Pagination';
-import { Link } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import { DocCardPage } from './DocCardPage';
 import { MainPage } from './MainPage';
@@ -31,6 +27,8 @@ const uniqueItems = (x, i, a) => a.indexOf(x) === i;
 const movieCategories = data.map(prod => prod.genre).filter(
   uniqueItems
 );
+movieCategories.push("All");
+movieCategories.sort();
 
 const MyMainPage = (props) => (
   <MainPage movies={data} categories={movieCategories}/>

@@ -14,7 +14,6 @@ export class MainPage extends Component {
   }
 
   setCategory(category) {
-    console.log(category),
     this.setState({
       displayCategory: category
     });

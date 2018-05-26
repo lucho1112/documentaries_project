@@ -15,7 +15,7 @@ export class DocVideo extends Component {
 
       )
     }*/ else if (link.includes('vimeo' )) {
-      var embed = link.replace ('vimeo.com','player.vimeo.com/video');
+      embed = link.replace ('vimeo.com','player.vimeo.com/video');
       return <iframe src={embed} width="640" height="356" frameborder="0" webkitallowfullscreen mozAllowFullScreen="true" allowFullScreen="true"></iframe>
 
     } else {
