@@ -38,7 +38,7 @@ export class DocList extends Component {
                )
              }
           )
-          .map((elt,i) => <DocCard i={i} elt={elt} /> )
+          .map((elt,i) => <DocCard i={i} elt={elt} subcategories={this.props.subcategories}/> )
 
         }
       </div>

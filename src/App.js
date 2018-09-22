@@ -24,17 +24,37 @@ const serializeData = function(dirtyData) {
 const data = serializeData(dirtyData);
 
 const uniqueItems = (x, i, a) => a.indexOf(x) === i;
-const movieCategories = data.map(prod => prod.genre).filter(
-  uniqueItems
-);
+const movieCategories = data
+  .map(prod => prod.genre)
+  .filter(uniqueItems);
+
+function flatten(arr) {
+    return [].concat(...arr)
+  }
+const listSubcategories = data
+  .map(
+    prod => prod.subcategory
+    .split(/[\s,]+/)
+    .filter(
+      word => word.length > 0
+    )
+  )
+const movieSubcategories =
+  flatten(listSubcategories)
+  .filter(uniqueItems)
+
+
 movieCategories.push("All");
 movieCategories.sort();
+console.log(listSubcategories)
 
+console.log(movieSubcategories)
+console.log(movieCategories)
 const MyMainPage = (props) => (
-  <MainPage movies={data} categories={movieCategories}/>
+  <MainPage movies={data} categories={movieCategories} subcategories={movieSubcategories}/>
 )
 const MyDocCardPage = (props) => (
-  <DocCardPage {...props} movies={data} />
+  <DocCardPage {...props} movies={data} subcategories={movieSubcategories} />
 );
 
 export class App extends Component {

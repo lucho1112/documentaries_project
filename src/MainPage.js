@@ -29,7 +29,8 @@ export class MainPage extends Component {
         <DocList
           movies={this.props.movies}
           setCategory={this.setCategory}
-          state={this.state} />
+          state={this.state}
+          subcategories={this.props.subcategories} />
       </div>
     );
   }

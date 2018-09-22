@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DocType } from './DocType';
+import {IndivSubcategories} from './IndivSubcategories';
 
 export function DocCard(props) {
 
-  const { i, elt } = props;
+  const { i, elt, subcategories } = props;
+
 
   return (
     <div className="card" key={i} id={elt.genre}>
@@ -21,7 +23,7 @@ export function DocCard(props) {
         <span>{elt.duration} minutes</span>
       </div>
       <p className="card-sum">{elt.plot}</p>
-      <div className="card-tags">{elt.subcategory}</div>
+      <div className="card-tags"><IndivSubcategories i={i} elt={elt} subcategories={subcategories} /></div>
     </div>
   )
 }
