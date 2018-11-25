@@ -2,15 +2,24 @@ import React, { Component } from 'react';
 import { DocCard } from './DocCard';
 
 export class DocList extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       search: '',
+      displaySubcategory: 'All',
+      movieSubcategories: this.props.subcategories,
     };
+    this.setSubcategory = this.setSubcategory.bind(this);
+  }
+  setSubcategory(subcategory) {
+    this.setState({
+      displaySubcategory: subcategory,
+    });
   }
   updateSearch(event) {
     this.setState({search: event.target.value})
   }
+
   render () {
 
     let filtered = this.props.movies.filter(
@@ -18,6 +27,8 @@ export class DocList extends Component {
         return  (
           elt.topic.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
           elt.genre.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
+          elt.subcategory.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
+          elt.year.toString().indexOf(this.state.search.toLowerCase()) !== -1 ||
           elt.plot.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         );
       }
@@ -31,14 +42,25 @@ export class DocList extends Component {
         />
         {
           filtered
-          .filter(
-             (elt,i) => {
-               return (
-                 this.props.state.displayCategory === elt.genre || this.props.state.displayCategory === "All"
-               )
-             }
-          )
-          .map((elt,i) => <DocCard i={i} elt={elt} subcategories={this.props.subcategories}/> )
+            .filter(
+               (elt,i) => {
+                 return (
+                   this.props.displayCategory === elt.genre ||
+                   this.props.displayCategory === "All"
+                 )
+               }
+            )
+            .filter(
+               (elt,i) => {
+
+                 return elt.subcategories.includes(this.state.displaySubcategory) ||
+                 this.state.displaySubcategory === "All"
+               }
+            )
+            .map((elt,i) => <DocCard
+                              key={i}
+                              elt={elt}
+                              handleClick={this.setSubcategory} /> )
 
         }
       </div>

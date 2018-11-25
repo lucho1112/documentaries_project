@@ -10,51 +10,41 @@ import { MainPage } from './MainPage';
 // define a fn to clean dirtyData to cleanData; ie add id + slug
 // dirtyData = [item1, item2, item3, ...]
 // item1 = { topic: 'blabla' ... }
-const serializeData = function(dirtyData) {
+function serializeData(dirtyData) {
   // takes an item in the array of data and clean it
-  const serializeItem = function(item, index) {
+  function serializeItem(item, index) {
     item.id = index;
     item.slug = encodeURIComponent(item.topic);
+
+    function serializeSubcategory(dirtySub) {
+      return dirtySub.split(' ').filter((el) => {
+        return typeof el === 'string' && el.length > 1
+      })
+    }
+    item.subcategories = serializeSubcategory(item.subcategory);
+    delete item.subcategory;
     return item;
   };
+
   const cleanData = dirtyData.map(serializeItem);
   return cleanData;
 };
 // call the clean data fn
 const data = serializeData(dirtyData);
+console.log(data);
 
 const uniqueItems = (x, i, a) => a.indexOf(x) === i;
 const movieCategories = data
   .map(prod => prod.genre)
   .filter(uniqueItems);
-
-function flatten(arr) {
-    return [].concat(...arr)
-  }
-const listSubcategories = data
-  .map(
-    prod => prod.subcategory
-    .split(/[\s,]+/)
-    .filter(
-      word => word.length > 0
-    )
-  )
-const movieSubcategories =
-  flatten(listSubcategories)
-  .filter(uniqueItems)
-
-
 movieCategories.push("All");
 movieCategories.sort();
-console.log(listSubcategories)
 
-console.log(movieSubcategories)
-console.log(movieCategories)
 const MyMainPage = (props) => (
-  <MainPage movies={data} categories={movieCategories} subcategories={movieSubcategories}/>
+  <MainPage movies={data} categories={movieCategories}/>
 )
 const MyDocCardPage = (props) => (
-  <DocCardPage {...props} movies={data} subcategories={movieSubcategories} />
+  <DocCardPage {...props} movies={data}/>
 );
 
 export class App extends Component {

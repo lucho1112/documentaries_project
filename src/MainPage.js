@@ -8,7 +8,7 @@ export class MainPage extends Component {
     super(props);
     this.state = {
       displayCategory: 'All',
-      movieCategories: this.props.categories
+      movieCategories: this.props.categories,
     };
     this.setCategory = this.setCategory.bind(this);
   }
@@ -29,8 +29,7 @@ export class MainPage extends Component {
         <DocList
           movies={this.props.movies}
           setCategory={this.setCategory}
-          state={this.state}
-          subcategories={this.props.subcategories} />
+          displayCategory={this.state.displayCategory} />
       </div>
     );
   }
