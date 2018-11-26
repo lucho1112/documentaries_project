@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DocCard } from './DocCard';
+import  ButtonTagAll from './ButtonTagAll'
 
 export class DocList extends Component {
   constructor(props){
@@ -39,6 +40,9 @@ export class DocList extends Component {
           value={this.state.search}
           onChange={this.updateSearch.bind(this)}
         />
+        <ButtonTagAll
+          handleClick={this.setSubcategory}
+          subcategory="All" />
         {
           filtered
             .filter(
@@ -51,7 +55,6 @@ export class DocList extends Component {
             )
             .filter(
                (elt,i) => {
-
                  return elt.subcategories.includes(this.state.displaySubcategory) ||
                  this.state.displaySubcategory === "All"
                }
