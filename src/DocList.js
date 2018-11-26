@@ -27,7 +27,6 @@ export class DocList extends Component {
         return  (
           elt.topic.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
           elt.genre.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
-          elt.subcategory.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
           elt.year.toString().indexOf(this.state.search.toLowerCase()) !== -1 ||
           elt.plot.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         );
