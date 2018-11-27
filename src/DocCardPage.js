@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import './App.css';
 import { DocType } from './DocType';
 import { DocVideo } from './DocVideo';
+import { Subcategories } from './Subcategories'
 
 
 export class DocCardPage extends Component {
 
   render () {
-    console.log(this.props.match.url)
+    console.log(this.props.handleClick)
+    /*console.log(this.props.match.url)
     console.log(this.props.movies[9].topic)
-    console.log('/movie/' + this.props.movies[9].topic)
+    console.log('/movie/' + this.props.movies[9].topic)*//*
+  export function DocCardPage(props) {
+    const { movies, categories, handleClick } = props;*/
     return (
 
     this.props.movies.map( (elt, i) => {
@@ -32,7 +36,10 @@ export class DocCardPage extends Component {
                     <span>{elt.duration} minutes</span>
                   </div>
                   <p className="card-sum">{elt.plot}</p>
-                  <div className="card-tags">{elt.subcategory}</div>
+                  <Subcategories
+                      i={i}
+                      elt={elt}
+                      handleClick={this.props.handleClick} />
           </div>
         )
       } else {
@@ -42,5 +49,5 @@ export class DocCardPage extends Component {
 
   )
   )
-  }
+}
 }

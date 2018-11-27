@@ -41,13 +41,32 @@ movieCategories.push("All");
 movieCategories.sort();
 
 const MyMainPage = (props) => (
-  <MainPage movies={data} categories={movieCategories}/>
+  <MainPage movies={data} categories={movieCategories} />
 )
 const MyDocCardPage = (props) => (
-  <DocCardPage {...props} movies={data}/>
+  <DocCardPage {...props} movies={data} categories={movieCategories} />
 );
 
 export class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      search: '',
+      displaySubcategory: 'All',
+      movieSubcategories: this.props.subcategories,
+    };
+    this.setSubcategory = this.setSubcategory.bind(this);
+  }
+  setSubcategory(subcategory) {
+    this.setState({
+      displaySubcategory: subcategory,
+    });
+  }
+  updateSearch(event) {
+    this.setState({search: event.target.value})
+  }
+
+
   render() {
     return  (
       <Switch>
@@ -57,9 +76,17 @@ export class App extends Component {
         />
         <Route
           path='/movie/:i'
-          children={MyDocCardPage}
+          render= {
+            (props) => <DocCardPage
+                          {...props}
+                          movies={data}
+                          categories={movieCategories}
+                          handleClick={this.setSubcategory} />
+          }
         />
       </Switch>
+
+
     )
   }
 };
