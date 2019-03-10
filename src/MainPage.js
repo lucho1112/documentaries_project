@@ -9,10 +9,9 @@ export class MainPage extends Component {
       displayCategory: "All",
       movieCategories: this.props.categories
     };
-    this.setCategory = this.setCategory.bind(this);
   }
 
-  setCategory(category) {
+  setCategory = (category) => {
     this.setState({
       displayCategory: category
     });

@@ -10,14 +10,13 @@ export class DocList extends Component {
       displaySubcategory: 'All',
       movieSubcategories: this.props.subcategories,
     };
-    this.setSubcategory = this.setSubcategory.bind(this);
   }
-  setSubcategory(subcategory) {
+  setSubcategory = (subcategory) => {
     this.setState({
       displaySubcategory: subcategory,
     });
   }
-  updateSearch(event) {
+  updateSearch = (event) => {
     this.setState({search: event.target.value})
   }
 
@@ -48,7 +47,7 @@ export class DocList extends Component {
         {
           filtered
             .filter(
-               (elt,i) => {
+               (elt) => {
                  return (
                    displayCategory === elt.genre ||
                    displayCategory === "All"
@@ -56,7 +55,7 @@ export class DocList extends Component {
                }
             )
             .filter(
-               (elt,i) => {
+               (elt) => {
                  return elt.subcategories.includes(displaySubcategory) ||
                  displaySubcategory === "All"
                }

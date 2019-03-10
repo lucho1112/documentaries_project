@@ -29,8 +29,6 @@ function serializeData(dirtyData) {
 }
 // call the clean data fn
 const data = serializeData(dirtyData);
-console.log(data);
-
 const uniqueItems = (x, i, a) => a.indexOf(x) === i;
 const movieCategories = data.map(prod => prod.genre).filter(uniqueItems);
 movieCategories.push("All");
@@ -44,14 +42,14 @@ export class App extends Component {
       displaySubcategory: "All",
       movieSubcategories: this.props.subcategories
     };
-    this.setSubcategory = this.setSubcategory.bind(this);
+    
   }
-  setSubcategory(subcategory) {
+  setSubcategory = (subcategory)  => {
     this.setState({
       displaySubcategory: subcategory
     });
   }
-  updateSearch(event) {
+  updateSearch = (event) => {
     this.setState({ search: event.target.value });
   }
 
