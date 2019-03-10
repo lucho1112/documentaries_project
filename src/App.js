@@ -43,7 +43,7 @@ export class App extends Component {
       displayCategory: "All"
     };
   }
-  setCategory = (category) => {
+  setCategory = category => {
     this.setState({
       displayCategory: category
     });

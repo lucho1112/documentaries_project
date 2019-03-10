@@ -8,6 +8,7 @@ export const ButtonCategory = props => {
   };
   return (
     <div
+      className="category-tab"
       onClick={() => handleClick(category)}
       style={buttonStyle}
       displayCategory={displayCategory}
