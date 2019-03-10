@@ -22,8 +22,10 @@ export class DocList extends Component {
   }
 
   render () {
+    const { movies, displayCategory } = this.props;
+    const { search, displaySubcategory } = this.state;
 
-    let filtered = this.props.movies.filter(
+    let filtered = movies.filter(
       (elt) => {
         return  (
           elt.topic.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1 ||
@@ -37,7 +39,7 @@ export class DocList extends Component {
       <div>
         <input
           type="text"
-          value={this.state.search}
+          value={search}
           onChange={this.updateSearch.bind(this)}
         />
         <ButtonTagAll
@@ -48,15 +50,15 @@ export class DocList extends Component {
             .filter(
                (elt,i) => {
                  return (
-                   this.props.displayCategory === elt.genre ||
-                   this.props.displayCategory === "All"
+                   displayCategory === elt.genre ||
+                   displayCategory === "All"
                  )
                }
             )
             .filter(
                (elt,i) => {
-                 return elt.subcategories.includes(this.state.displaySubcategory) ||
-                 this.state.displaySubcategory === "All"
+                 return elt.subcategories.includes(displaySubcategory) ||
+                 displaySubcategory === "All"
                }
             )
             .map((elt,i) => <DocCard

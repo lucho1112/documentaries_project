@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
-import { ButtonCategory } from './ButtonCategory';
+import React from "react";
+import { ButtonCategory } from "./ButtonCategory";
 
-export class ButtonCategories extends Component {
-  render () {
-      return (
-        this.props.categories.map((category, i) => {
-          return <ButtonCategory
-                    key={i}
-                    handleClick={this.props.handleClick}
-                    category={category} />
-        }
-      )
-    )
-  }
+export const ButtonCategories = props => {
+  const { categories, handleClick } = props;
+  return categories.map((category, i) => {
+    return (
+      <ButtonCategory key={i} handleClick={handleClick} category={category} />
+    );
+  });
 };

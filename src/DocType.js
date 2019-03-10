@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React from "react";
 
+export const DocType = props => {
+  const { genre } = props;
+  const genreOf = genre === "Documentaire" ? "red" : "blue";
+  const spanStyle = {
+    backgroundColor: genreOf
+  };
 
-export class DocType extends Component {
-  render () {
-
-    if (this.props.genre === 'Documentaire') {
-      var genreOf = 'red';
-    } else {
-      genreOf = 'blue';
-    };
-    const styles = {
-      backgroundColor: genreOf
-    }
-
-    return ( <p><span  style={styles}>{this.props.genre}</span></p>);
-}
-}
+  return (
+    <p>
+      <span style={spanStyle}>{genre}</span>
+    </p>
+  );
+};

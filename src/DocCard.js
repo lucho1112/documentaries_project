@@ -4,7 +4,7 @@ import { DocType } from './DocType';
 import {Subcategories} from './Subcategories';
 
 
-export function DocCard(props) {
+export const DocCard = props => {
   const { i, elt, handleClick } = props;
 
   return (

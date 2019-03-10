@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from "react";
 
-export class ButtonCategory extends Component {
-  render () {
-    return <button onClick={() => this.props.handleClick(this.props.category)}>{this.props.category}</button>
-  }
-}
+export const ButtonCategory = props => {
+  const { category, handleClick } = props;
+  return <button onClick={() => handleClick(category)}>{category}</button>;
+};

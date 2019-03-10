@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-/*import logo from './logo.svg';*/
-import './App.css';
-import dirtyData from './data.json';
-import { Switch, Route } from 'react-router-dom';
-import { DocCardPage } from './DocCardPage';
-import { MainPage } from './MainPage';
-
+import React, { Component } from "react";
+import "./App.css";
+import dirtyData from "./data.json";
+import { Switch, Route } from "react-router-dom";
+import { DocCardPage } from "./DocCardPage";
+import { MainPage } from "./MainPage";
 
 // define a fn to clean dirtyData to cleanData; ie add id + slug
 // dirtyData = [item1, item2, item3, ...]
@@ -17,78 +15,66 @@ function serializeData(dirtyData) {
     item.slug = encodeURIComponent(item.topic);
 
     function serializeSubcategory(dirtySub) {
-      return dirtySub.split(' ').filter((el) => {
-        return typeof el === 'string' && el.length > 1
-      })
+      return dirtySub.split(" ").filter(el => {
+        return typeof el === "string" && el.length > 1;
+      });
     }
     item.subcategories = serializeSubcategory(item.subcategory);
     delete item.subcategory;
     return item;
-  };
+  }
 
   const cleanData = dirtyData.map(serializeItem);
   return cleanData;
-};
+}
 // call the clean data fn
 const data = serializeData(dirtyData);
 console.log(data);
 
 const uniqueItems = (x, i, a) => a.indexOf(x) === i;
-const movieCategories = data
-  .map(prod => prod.genre)
-  .filter(uniqueItems);
+const movieCategories = data.map(prod => prod.genre).filter(uniqueItems);
 movieCategories.push("All");
 movieCategories.sort();
 
-const MyMainPage = (props) => (
-  <MainPage movies={data} categories={movieCategories} />
-)
-const MyDocCardPage = (props) => (
-  <DocCardPage {...props} movies={data} categories={movieCategories} />
-);
-
 export class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      search: '',
-      displaySubcategory: 'All',
-      movieSubcategories: this.props.subcategories,
+      search: "",
+      displaySubcategory: "All",
+      movieSubcategories: this.props.subcategories
     };
     this.setSubcategory = this.setSubcategory.bind(this);
   }
   setSubcategory(subcategory) {
     this.setState({
-      displaySubcategory: subcategory,
+      displaySubcategory: subcategory
     });
   }
   updateSearch(event) {
-    this.setState({search: event.target.value})
+    this.setState({ search: event.target.value });
   }
-
 
   render() {
-    return  (
+    return (
       <Switch>
+        <Route exact path="/">
+          <MainPage movies={data} categories={movieCategories} />
+        </Route>
         <Route
-          exact path='/'
-          children={MyMainPage}
-        />
-        <Route
-          path='/movie/:i'
-          render= {
-            (props) => <DocCardPage
-                          {...props}
-                          movies={data}
-                          categories={movieCategories}
-                          handleClick={this.setSubcategory} />
-          }
+          path="/movie/:i"
+          render={props => (
+            <DocCardPage
+              {...props}
+              movies={data}
+              categories={movieCategories}
+              handleClick={this.setSubcategory}
+            />
+          )}
         />
       </Switch>
-
-
-    )
+    );
   }
-};
+}
 
 export default App;

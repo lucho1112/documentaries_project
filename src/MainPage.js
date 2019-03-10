@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import { DocList } from './DocList';
-import { ButtonCategories } from './ButtonCategories';
+import React, { Component } from "react";
+import { DocList } from "./DocList";
+import { ButtonCategories } from "./ButtonCategories";
 
 export class MainPage extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      displayCategory: 'All',
-      movieCategories: this.props.categories,
+      displayCategory: "All",
+      movieCategories: this.props.categories
     };
     this.setCategory = this.setCategory.bind(this);
   }
@@ -19,18 +18,22 @@ export class MainPage extends Component {
     });
   }
 
-  render () {
+  render() {
+    const { movies, categories } = this.props;
+    const { displayCategory } = this.state;
     return (
       <div>
         <ButtonCategories
-          movies={this.props.movies}
-          categories={this.props.categories}
-          handleClick={this.setCategory} />
+          movies={movies}
+          categories={categories}
+          handleClick={this.setCategory}
+        />
         <DocList
-          movies={this.props.movies}
+          movies={movies}
           setCategory={this.setCategory}
-          displayCategory={this.state.displayCategory} />
+          displayCategory={displayCategory}
+        />
       </div>
     );
   }
-};
+}
