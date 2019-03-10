@@ -1,12 +1,16 @@
 import React from "react";
 
 const ButtonTagAll = props => {
-  const { handleClick, subcategory } = props;
+  const { handleClick, subcategory, currentSubcategory } = props;
 
   return (
-    <button className="tag-clearer" onClick={() => handleClick(subcategory)}>
-      Clear Tags X
+<div>
+    <div>{currentSubcategory}</div>
+   <button className="tag-clearer" onClick={() => handleClick(subcategory)}>
+      Clear Tag X
     </button>
+  </div>
+   
   );
 };
 export default ButtonTagAll;

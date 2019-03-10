@@ -1,5 +1,6 @@
 import React from "react";
-import { DocList } from "./DocList";
+import ButtonTagAll from "./ButtonTagAll";
+import { DocCard } from "./DocCard";
 import { ButtonCategories } from "./ButtonCategories";
 
 export const MainPage = props => {
@@ -13,22 +14,45 @@ export const MainPage = props => {
     displayCategory,
     setCategory
   } = props;
+  let filtered = movies.filter(elt => {
+    return (
+      elt.topic.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+      elt.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+      elt.year.toString().indexOf(search.toLowerCase()) !== -1 ||
+      elt.plot.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    );
+  });
   return (
-    <div>
+    <div className="main">
       <ButtonCategories
         movies={movies}
         categories={categories}
         handleClick={setCategory}
-      />
-      <DocList
-        movies={movies}
-        setCategory={this.setCategory}
-        setSubcategory={setSubcategory}
         displayCategory={displayCategory}
-        displaySubcategory={displaySubcategory}
-        search={search}
-        updateSearch={updateSearch}
       />
+      <input type="text" value={search} onChange={updateSearch} />
+      <div className="doclist">
+        {displaySubcategory !== "All" && (
+          <ButtonTagAll
+            handleClick={setSubcategory}
+            subcategory="All"
+            currentSubcategory={displaySubcategory}
+          />
+        )}
+        {filtered
+          .filter(elt => {
+            return displayCategory === elt.genre || displayCategory === "All";
+          })
+          .filter(elt => {
+            return (
+              elt.subcategories.includes(displaySubcategory) ||
+              displaySubcategory === "All"
+            );
+          })
+          .map((elt, i) => (
+            <DocCard key={i} elt={elt} handleClick={setSubcategory} />
+          ))}
+      </div>
     </div>
   );
 };
