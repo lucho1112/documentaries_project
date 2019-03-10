@@ -40,24 +40,38 @@ export class App extends Component {
     this.state = {
       search: "",
       displaySubcategory: "All",
-      movieSubcategories: this.props.subcategories
+      displayCategory: "All"
     };
-    
   }
-  setSubcategory = (subcategory)  => {
+  setCategory = (category) => {
+    this.setState({
+      displayCategory: category
+    });
+  }
+  setSubcategory = subcategory => {
     this.setState({
       displaySubcategory: subcategory
     });
-  }
-  updateSearch = (event) => {
+  };
+  updateSearch = event => {
     this.setState({ search: event.target.value });
-  }
+  };
 
   render() {
+    const { displayCategory, displaySubcategory, search } = this.state;
     return (
       <Switch>
         <Route exact path="/">
-          <MainPage movies={data} categories={movieCategories} />
+          <MainPage
+            movies={data}
+            categories={movieCategories}
+            displayCategory={displayCategory}
+            displaySubcategory={displaySubcategory}
+            search={search}
+            setCategory={this.setCategory}
+            setSubcategory={this.setSubcategory}
+            updateSearch={this.updateSearch}
+          />
         </Route>
         <Route
           path="/movie/:i"
