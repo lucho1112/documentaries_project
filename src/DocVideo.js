@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
 export const DocVideo = props => {
-  const { link } = props;
-  if (link.includes("youtube")) {
-    var embed = link.replace("watch?v=", "embed/");
+  const { link } = props
+  if (link.includes('youtube')) {
+    var embed = link.replace('watch?v=', 'embed/')
     return (
       <iframe
         title={link}
@@ -14,8 +14,8 @@ export const DocVideo = props => {
         allow="autoplay; encrypted-media"
         allowFullScreen={true}
       />
-    );
-  } /*else if (link.includes('ted.com')) {
+    )
+  } /* else if (link.includes('ted.com')) {
       var embed = link.replace('wwww', 'embed');
       var embed2 = embed.replace('/transcript', '');
       return (
@@ -23,10 +23,10 @@ export const DocVideo = props => {
             <iframe src={embed} width="854" height="480" frameborder="0"  allowfullscreen={true}></iframe>
 
       )
-    }*/ else if (
-    link.includes("vimeo")
+    } */ else if (
+    link.includes('vimeo')
   ) {
-    embed = link.replace("vimeo.com", "player.vimeo.com/video");
+    embed = link.replace('vimeo.com', 'player.vimeo.com/video')
     return (
       <iframe
         src={embed}
@@ -38,8 +38,8 @@ export const DocVideo = props => {
         mozAllowFullScreen="true"
         allowFullScreen="true"
       />
-    );
+    )
   } else {
-    return <a href={link}>Video</a>;
+    return <a href={link}>Video</a>
   }
-};
+}

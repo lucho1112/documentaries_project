@@ -1,8 +1,8 @@
-import React from "react";
-import { ButtonCategory } from "./ButtonCategory";
+import React from 'react'
+import { ButtonCategory } from './ButtonCategory'
 
 export const ButtonCategories = props => {
-  const { categories, handleClick, displayCategory } = props;
+  const { categories, handleClick, displayCategory } = props
   return categories.map((category, i) => {
     return (
       <ButtonCategory
@@ -11,6 +11,6 @@ export const ButtonCategories = props => {
         category={category}
         displayCategory={displayCategory}
       />
-    );
-  });
-};
+    )
+  })
+}

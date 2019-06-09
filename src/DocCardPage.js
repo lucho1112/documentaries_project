@@ -1,13 +1,13 @@
-import React from "react";
-import "./App.css";
-import { DocType } from "./DocType";
-import { DocVideo } from "./DocVideo";
-import { Subcategories } from "./Subcategories";
+import React from 'react'
+import './App.css'
+import { DocType } from './DocType'
+import { DocVideo } from './DocVideo'
+import { Subcategories } from './Subcategories'
 
 export const DocCardPage = props => {
-  const { movies, handleClick, match } = props;
+  const { movies, handleClick, match } = props
   return movies.map((elt, i) => {
-    if ("/movie/" + i === match.url) {
+    if ('/movie/' + i === match.url) {
       return (
         <div>
           <DocType genre={elt.genre} className="card-type" />
@@ -23,9 +23,9 @@ export const DocCardPage = props => {
           <p className="card-sum">{elt.plot}</p>
           <Subcategories i={i} elt={elt} handleClick={handleClick} />
         </div>
-      );
+      )
     } else {
-      return null;
+      return null
     }
-  });
-};
+  })
+}

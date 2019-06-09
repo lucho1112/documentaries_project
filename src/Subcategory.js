@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
 const Subcategory = props => {
-  const { handleClick, subcategory } = props;
+  const { handleClick, subcategory } = props
   return (
     <button onClick={() => handleClick(subcategory)}>{subcategory}</button>
-  );
-};
-export default Subcategory;
+  )
+}
+export default Subcategory

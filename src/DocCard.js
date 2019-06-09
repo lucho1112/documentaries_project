@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { DocType } from "./DocType";
-import { Subcategories } from "./Subcategories";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { DocType } from './DocType'
+import { Subcategories } from './Subcategories'
 
 export const DocCard = props => {
-  const { i, elt, handleClick } = props;
+  const { i, elt, handleClick } = props
 
   return (
     <div className="card" key={i} id={elt.genre}>
@@ -22,5 +22,5 @@ export const DocCard = props => {
         <Subcategories i={i} elt={elt} handleClick={handleClick} />
       </div>
     </div>
-  );
-};
+  )
+}
