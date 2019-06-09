@@ -4,7 +4,7 @@ module.exports = {
     'es6': true,
     'node': true
   },
-  'extends': 'standard',
+  'extends': 'plugin:prettier/recommended',
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly'
@@ -20,5 +20,6 @@ module.exports = {
     'react'
   ],
   'rules': {
+    "semi": [2, "always"],
   }
 }

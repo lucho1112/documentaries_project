@@ -42,12 +42,12 @@ export class App extends Component {
       displaySubcategory: "All",
       displayCategory: "All"
     };
-  }
+  };
   setCategory = category => {
     this.setState({
       displayCategory: category
     });
-  }
+  };
   setSubcategory = subcategory => {
     this.setState({
       displaySubcategory: subcategory

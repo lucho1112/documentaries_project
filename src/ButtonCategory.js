@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 export const ButtonCategory = props => {
-  const { category, handleClick, displayCategory } = props
-  const focused = category === displayCategory ? 'bold' : 'normal'
+  const { category, handleClick, displayCategory } = props;
+  const focused = category === displayCategory ? "bold" : "normal";
   const buttonStyle = {
     fontWeight: focused
-  }
+  };
   return (
     <div
       className="category-tab"
@@ -15,5 +15,5 @@ export const ButtonCategory = props => {
     >
       {category}
     </div>
-  )
-}
+  );
+};
