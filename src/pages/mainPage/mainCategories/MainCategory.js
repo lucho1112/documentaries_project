@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ButtonCategory = props => {
+export const MainCategory = props => {
   const { category, handleClick, displayCategory } = props;
   const focused = category === displayCategory ? "bold" : "normal";
   const buttonStyle = {

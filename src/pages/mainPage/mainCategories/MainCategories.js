@@ -1,11 +1,11 @@
 import React from "react";
-import { ButtonCategory } from "./ButtonCategory";
+import { MainCategory } from "./MainCategory";
 
-export const ButtonCategories = props => {
+export const MainCategories = props => {
   const { categories, handleClick, displayCategory } = props;
   return categories.map((category, i) => {
     return (
-      <ButtonCategory
+      <MainCategory
         key={i}
         handleClick={handleClick}
         category={category}

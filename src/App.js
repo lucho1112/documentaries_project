@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import dirtyData from "./data.json";
+import dirtyData from "./data/data.json";
 import { Switch, Route } from "react-router-dom";
-import { DocCardPage } from "./DocCardPage";
-import { MainPage } from "./MainPage";
+import { DocCardPage } from "./pages/docPage/DocPage";
+import { MainPage } from "./pages/mainPage/MainPage";
 
 // define a fn to clean dirtyData to cleanData; ie add id + slug
 // dirtyData = [item1, item2, item3, ...]

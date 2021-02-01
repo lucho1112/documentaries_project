@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonTagAll from "./ButtonTagAll";
-import { DocCard } from "./DocCard";
-import { ButtonCategories } from "./ButtonCategories";
+import { DocCard } from "../../components/DocCard";
+import { MainCategories } from "./mainCategories/MainCategories";
 
 export const MainPage = props => {
   const {
@@ -24,7 +24,7 @@ export const MainPage = props => {
   });
   return (
     <div className="main">
-      <ButtonCategories
+      <MainCategories
         movies={movies}
         categories={categories}
         handleClick={setCategory}
