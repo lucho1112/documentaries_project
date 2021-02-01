@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
-import { DocType } from "./DocType";
-import { DocVideo } from "./DocVideo";
-import { Subcategories } from "./Subcategories";
+import "../../App.css";
+import { DocType } from "../../components/DocType";
+import { DocVideo } from "../../components/DocVideo";
+import { Tags } from "./Tags/Tags";
 
 export const DocCardPage = props => {
   const { movies, handleClick, match } = props;
@@ -21,7 +21,7 @@ export const DocCardPage = props => {
             <span>{elt.duration} minutes</span>
           </div>
           <p className="card-sum">{elt.plot}</p>
-          <Subcategories i={i} elt={elt} handleClick={handleClick} />
+          <Tags i={i} elt={elt} handleClick={handleClick} />
         </div>
       );
     } else {

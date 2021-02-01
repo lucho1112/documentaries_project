@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DocType } from "./DocType";
-import { Subcategories } from "./Subcategories";
+import { Tags } from "../pages/docPage/Tags/Tags";
 
 export const DocCard = props => {
   const { i, elt, handleClick } = props;
@@ -19,7 +19,7 @@ export const DocCard = props => {
       </div>
       <p className="card-sum">{elt.plot}</p>
       <div className="card-tags">
-        <Subcategories i={i} elt={elt} handleClick={handleClick} />
+        <Tags i={i} elt={elt} handleClick={handleClick} />
       </div>
     </div>
   );
