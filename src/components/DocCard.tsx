@@ -4,7 +4,6 @@ import { DocType } from "./DocType";
 import { Tags } from "../pages/docPage/Tags/Tags";
 
 type Props = {
-  i: number,
   elt: {
     genre: string,
     topic: string,
@@ -13,14 +12,15 @@ type Props = {
     year: string,
     duration: string,
     plot: string,
+    subcategories: string[],
   },
   handleClick: Function
 }
-export const DocCard = (props: Props):JSX.Element => {
-  const { i, elt, handleClick } = props;
+export const DocCard = (props: Props) => {
+  const { elt, handleClick } = props;
 
   return (
-    <div className="card" key={i} id={elt.genre}>
+    <div className="card" id={elt.genre}>
       <DocType genre={elt.genre} className="card-type" />
       <Link to={`/movie/${elt.id}`}>
         <h2 className="card-title">{elt.topic}</h2>
@@ -32,7 +32,7 @@ export const DocCard = (props: Props):JSX.Element => {
       </div>
       <p className="card-sum">{elt.plot}</p>
       <div className="card-tags">
-        <Tags i={i} elt={elt} handleClick={handleClick} />
+        <Tags tags={elt.subcategories} handleClick={handleClick} />
       </div>
     </div>
   );

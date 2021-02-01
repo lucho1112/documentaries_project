@@ -3,7 +3,28 @@ import ButtonTagAll from "./ButtonTagAll";
 import { DocCard } from "../../components/DocCard";
 import { MainCategories } from "./mainCategories/MainCategories";
 
-export const MainPage = props => {
+type Props = {
+  movies: {
+    genre: string,
+    topic: string,
+    id: string,
+    category: string,
+    year: string,
+    duration: string,
+    plot: string,
+    subcategories: string[],
+  }[],
+  categories: string[],
+  displaySubcategory: string,
+  setSubcategory: Function,
+  search: string,
+  // line below to fix
+  updateSearch: any,
+  displayCategory: string,
+  setCategory: Function
+}
+
+export const MainPage = (props: Props) => {
   const {
     movies,
     categories,
@@ -25,7 +46,7 @@ export const MainPage = props => {
   return (
     <div className="main">
       <MainCategories
-        movies={movies}
+        // movies={movies}
         categories={categories}
         handleClick={setCategory}
         displayCategory={displayCategory}
