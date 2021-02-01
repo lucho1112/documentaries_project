@@ -3,7 +3,20 @@ import { Link } from "react-router-dom";
 import { DocType } from "./DocType";
 import { Tags } from "../pages/docPage/Tags/Tags";
 
-export const DocCard = props => {
+type Props = {
+  i: number,
+  elt: {
+    genre: string,
+    topic: string,
+    id: string,
+    category: string,
+    year: string,
+    duration: string,
+    plot: string,
+  },
+  handleClick: Function
+}
+export const DocCard = (props: Props):JSX.Element => {
   const { i, elt, handleClick } = props;
 
   return (
