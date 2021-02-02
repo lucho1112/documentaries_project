@@ -1,6 +1,8 @@
-import React from "react";
+// import React from "react";
 
-export const DocVideo = props => {
+type Props = { link: string }
+
+export const DocVideo = (props: Props) => {
   const { link } = props;
   if (link.includes("youtube")) {
     var embed = link.replace("watch?v=", "embed/");
@@ -10,7 +12,7 @@ export const DocVideo = props => {
         width="560"
         height="315"
         src={embed}
-        frameborder="0"
+        frameBorder="0"
         allow="autoplay; encrypted-media"
         allowFullScreen={true}
       />
@@ -33,10 +35,8 @@ export const DocVideo = props => {
         title={link}
         width="640"
         height="356"
-        frameborder="0"
-        webkitallowfullscreen
-        mozAllowFullScreen="true"
-        allowFullScreen="true"
+        frameBorder="0"
+        allowFullScreen
       />
     );
   } else {

@@ -1,8 +1,15 @@
 import React from "react";
 
-export const MainCategory = props => {
+type Props = {
+  category: string,
+  handleClick: Function,
+  displayCategory: string
+}
+  
+
+export const MainCategory = (props: Props) => {
   const { category, handleClick, displayCategory } = props;
-  const focused = category === displayCategory ? "bold" : "normal";
+  const focused: "bold" | "normal" = category === displayCategory ? "bold" : "normal";
   const buttonStyle = {
     fontWeight: focused
   };
@@ -11,7 +18,6 @@ export const MainCategory = props => {
       className="category-tab"
       onClick={() => handleClick(category)}
       style={buttonStyle}
-      displayCategory={displayCategory}
     >
       {category}
     </div>

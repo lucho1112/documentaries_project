@@ -1,6 +1,12 @@
 import React from "react";
 
-const ButtonTagAll = props => {
+type Props = {
+  handleClick: Function,
+  subcategory: string,
+  currentSubcategory: string
+}
+
+const ButtonTagAll = (props: Props) => {
   const { handleClick, subcategory, currentSubcategory } = props;
 
   return (
