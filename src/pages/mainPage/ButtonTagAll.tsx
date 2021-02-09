@@ -1,22 +1,21 @@
-import React from "react";
+import React from 'react';
 
 type Props = {
-  handleClick: Function,
-  subcategory: string,
-  currentSubcategory: string
-}
+    handleClick: (subcategory: string) => void;
+    subcategory: string;
+    currentSubcategory: string;
+};
 
 const ButtonTagAll = (props: Props) => {
-  const { handleClick, subcategory, currentSubcategory } = props;
+    const { handleClick, subcategory, currentSubcategory } = props;
 
-  return (
-<div>
-    <div>{currentSubcategory}</div>
-   <button className="tag-clearer" onClick={() => handleClick(subcategory)}>
-      Clear Tag X
-    </button>
-  </div>
-   
-  );
+    return (
+        <div>
+            <div>{currentSubcategory}</div>
+            <button className="tag-clearer" onClick={() => handleClick(subcategory)}>
+                Clear Tag X
+            </button>
+        </div>
+    );
 };
 export default ButtonTagAll;
