@@ -2,7 +2,7 @@ import React from 'react';
 import Tag from './Tag';
 
 type Props = {
-    handleClick: Function;
+    handleClick: (tag: string) => void;
     tags: string[];
 };
 

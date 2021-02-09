@@ -15,7 +15,7 @@ type Props = {
         plot: string;
         subcategories: string[];
     }[];
-    handleClick: Function;
+    handleClick: (tag: string) => void;
     match: any;
 };
 

@@ -14,7 +14,7 @@ type Props = {
         plot: string;
         subcategories: string[];
     };
-    handleClick: Function;
+    handleClick: (tag: string) => void;
 };
 export const DocCard = (props: Props) => {
     const { elt, handleClick } = props;

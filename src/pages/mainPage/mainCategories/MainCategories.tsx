@@ -3,7 +3,7 @@ import { MainCategory } from './MainCategory';
 
 type Props = {
     categories: string[];
-    handleClick: Function;
+    handleClick: (category: string) => void;
     displayCategory: string;
 };
 

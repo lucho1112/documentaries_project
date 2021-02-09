@@ -1,11 +1,12 @@
-// import React from "react";
+import React from 'react';
 
 type Props = { link: string };
 
 export const DocVideo = (props: Props) => {
     const { link } = props;
+    let embed;
     if (link.includes('youtube')) {
-        var embed = link.replace('watch?v=', 'embed/');
+        embed = link.replace('watch?v=', 'embed/');
         return (
             <iframe
                 title={link}

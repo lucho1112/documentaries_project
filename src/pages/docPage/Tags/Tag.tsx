@@ -1,7 +1,7 @@
 import React from 'react';
 
 type Props = {
-    handleClick: Function;
+    handleClick: (tag: string) => void;
     tag: string;
     key: number;
 };
