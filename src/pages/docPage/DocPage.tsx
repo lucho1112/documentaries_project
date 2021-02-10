@@ -16,15 +16,14 @@ type Props = {
         subcategories: string[];
     }[];
     handleClick: (tag: string) => void;
-    match: any;
 };
 
-export const DocCardPage = (props: Props) => {
-    const { movies, handleClick, match } = props;
+export const DocPage = (props: Props) => {
+    const { movies, handleClick } = props;
 
     let docCard;
     movies.map((elt, i) => {
-        if ('/movie/' + i === match.url) {
+        if ('/movie/' + i === location.pathname) {
             docCard = (
                 <div>
                     <DocType genre={elt.genre} className="card-type" />

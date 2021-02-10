@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonTagAll from './ButtonTagAll';
 import { DocCard } from '../../components/DocCard';
 import { MainCategories } from './mainCategories/MainCategories';
@@ -17,24 +17,30 @@ type Props = {
     categories: string[];
     displaySubcategory: string;
     setSubcategory: (subcategory: string) => void;
-    search: string;
-    // line below to fix
-    updateSearch: (event: string) => void;
-    displayCategory: string;
-    setCategory: (category: string) => void;
 };
 
 export const MainPage = (props: Props) => {
-    const {
-        movies,
-        categories,
-        displaySubcategory,
-        setSubcategory,
-        search,
-        updateSearch,
-        displayCategory,
-        setCategory,
-    } = props;
+    const [search, updateSearch] = useState('');
+    const [displayCategory, setCategory] = useState('All');
+
+    // const [state, setState] = useState({ search: '', displayCategory: 'All', displaySubcategory: 'All' })
+    // const setCategory = (category: string) =>
+    //   setState({
+    //     ...state,
+    //     displayCategory: category
+    //   })
+    // const setSubcategory = (subcategory: string) =>
+    //   setState({
+    //     ...state,
+    //     displaySubcategory: subcategory
+    //   })
+    // const updateSearch = (event: string) =>
+    //   setState({
+    //     ...state,
+    //     search: event
+    //   })
+    // const { search, displayCategory, displaySubcategory } = state
+    const { movies, categories, setSubcategory, displaySubcategory } = props;
     console.log(search);
     const filtered = movies.filter((elt) => {
         return (
@@ -46,12 +52,7 @@ export const MainPage = (props: Props) => {
     });
     return (
         <div className="main">
-            <MainCategories
-                // movies={movies}
-                categories={categories}
-                handleClick={setCategory}
-                displayCategory={displayCategory}
-            />
+            <MainCategories categories={categories} handleClick={setCategory} displayCategory={displayCategory} />
             <input type="text" value={search} onChange={(e) => updateSearch(e.target.value)} />
             <div className="doclist">
                 {displaySubcategory !== 'All' && (
