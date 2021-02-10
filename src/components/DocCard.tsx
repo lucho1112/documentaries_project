@@ -16,7 +16,7 @@ type Props = {
     };
     handleClick: (tag: string) => void;
 };
-export const DocCard = (props: Props) => {
+export const DocCard = (props: Props): React.ReactElement => {
     const { elt, handleClick } = props;
 
     return (
