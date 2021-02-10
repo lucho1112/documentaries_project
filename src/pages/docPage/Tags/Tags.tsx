@@ -6,7 +6,7 @@ type Props = {
     tags: string[];
 };
 
-export const Tags = (props: Props) => {
+export const Tags = (props: Props): JSX.Element => {
     const { tags, handleClick } = props;
 
     return (

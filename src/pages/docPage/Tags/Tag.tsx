@@ -6,7 +6,7 @@ type Props = {
     key: number;
 };
 
-const Subcategory = (props: Props) => {
+const Subcategory = (props: Props): JSX.Element => {
     const { handleClick, tag } = props;
     return <button onClick={() => handleClick(tag)}>{tag}</button>;
 };

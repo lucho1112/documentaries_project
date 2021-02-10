@@ -19,7 +19,7 @@ type Props = {
     setSubcategory: (subcategory: string) => void;
     search: string;
     // line below to fix
-    updateSearch: any;
+    updateSearch: (event: string) => void;
     displayCategory: string;
     setCategory: (category: string) => void;
 };
@@ -35,6 +35,7 @@ export const MainPage = (props: Props) => {
         displayCategory,
         setCategory,
     } = props;
+    console.log(search);
     const filtered = movies.filter((elt) => {
         return (
             elt.topic.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
@@ -51,7 +52,7 @@ export const MainPage = (props: Props) => {
                 handleClick={setCategory}
                 displayCategory={displayCategory}
             />
-            <input type="text" value={search} onChange={updateSearch} />
+            <input type="text" value={search} onChange={(e) => updateSearch(e.target.value)} />
             <div className="doclist">
                 {displaySubcategory !== 'All' && (
                     <ButtonTagAll

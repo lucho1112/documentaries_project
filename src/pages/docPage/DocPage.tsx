@@ -44,5 +44,5 @@ export const DocCardPage = (props: Props) => {
         }
     });
 
-    return docCard;
+    return <div>{docCard}</div>;
 };
