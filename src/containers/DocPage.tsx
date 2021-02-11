@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../App.css';
-import { DocType } from '../../components/DocType';
-import { DocVideo } from '../../components/DocVideo';
-import { Tags } from './Tags/Tags';
+import '../App.css';
+import { DocType } from '../components/DocType';
+import { DocVideo } from '../components/DocVideo';
+import { Tag } from '../components/Tag';
 
 type Props = {
     movies: {
@@ -18,7 +18,7 @@ type Props = {
     handleClick: (tag: string) => void;
 };
 
-export const DocPage = (props: Props) => {
+export const DocPage: React.FC<Props> = (props: Props) => {
     const { movies, handleClick } = props;
 
     let docCard;
@@ -37,7 +37,9 @@ export const DocPage = (props: Props) => {
                         <span>{elt.duration} minutes</span>
                     </div>
                     <p className="card-sum">{elt.plot}</p>
-                    <Tags tags={elt.subcategories} handleClick={handleClick} />
+                    {elt.subcategories.map((tag, i) => (
+                        <Tag handleClick={handleClick} tag={tag} key={i} />
+                    ))}
                 </div>
             );
         }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ButtonTagAll from './ButtonTagAll';
-import { DocCard } from '../../components/DocCard';
-import { MainCategories } from './mainCategories/MainCategories';
+import ButtonTagAll from '../components/ButtonTagAll';
+import { DocCard } from '../components/DocCard';
+import { Category } from '../components/Category';
 
 type Props = {
     movies: {
@@ -19,9 +19,9 @@ type Props = {
     setSubcategory: (subcategory: string) => void;
 };
 
-export const MainPage = (props: Props) => {
+export const MainPage: React.FC<Props> = (props: Props) => {
     const [search, updateSearch] = useState('');
-    const [displayCategory, setCategory] = useState('All');
+    const [selectedCategory, setCategory] = useState('All');
 
     // const [state, setState] = useState({ search: '', displayCategory: 'All', displaySubcategory: 'All' })
     // const setCategory = (category: string) =>
@@ -52,7 +52,16 @@ export const MainPage = (props: Props) => {
     });
     return (
         <div className="main">
-            <MainCategories categories={categories} handleClick={setCategory} displayCategory={displayCategory} />
+            {categories.map((category, i) => {
+                return (
+                    <Category
+                        key={i}
+                        handleClick={setCategory}
+                        category={category}
+                        selectedCategory={selectedCategory}
+                    />
+                );
+            })}
             <input type="text" value={search} onChange={(e) => updateSearch(e.target.value)} />
             <div className="doclist">
                 {displaySubcategory !== 'All' && (
@@ -64,7 +73,7 @@ export const MainPage = (props: Props) => {
                 )}
                 {filtered
                     .filter((elt) => {
-                        return displayCategory === elt.genre || displayCategory === 'All';
+                        return selectedCategory === elt.genre || selectedCategory === 'All';
                     })
                     .filter((elt) => {
                         return elt.subcategories.includes(displaySubcategory) || displaySubcategory === 'All';

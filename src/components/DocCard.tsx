@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { DocType } from './DocType';
-import { Tags } from '../pages/docPage/Tags/Tags';
+import { Tag } from './Tag';
 
 type Props = {
     elt: {
@@ -16,7 +16,7 @@ type Props = {
     };
     handleClick: (tag: string) => void;
 };
-export const DocCard = (props: Props): React.ReactElement => {
+export const DocCard: React.FC<Props> = (props: Props) => {
     const { elt, handleClick } = props;
 
     return (
@@ -32,7 +32,9 @@ export const DocCard = (props: Props): React.ReactElement => {
             </div>
             <p className="card-sum">{elt.plot}</p>
             <div className="card-tags">
-                <Tags tags={elt.subcategories} handleClick={handleClick} />
+                {elt.subcategories.map((tag, i) => (
+                    <Tag handleClick={handleClick} tag={tag} key={i} />
+                ))}
             </div>
         </div>
     );
