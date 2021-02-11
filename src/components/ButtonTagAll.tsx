@@ -6,7 +6,7 @@ type Props = {
     currentSubcategory: string;
 };
 
-const ButtonTagAll = (props: Props) => {
+const ButtonTagAll: React.FC<Props> = (props: Props) => {
     const { handleClick, subcategory, currentSubcategory } = props;
 
     return (
