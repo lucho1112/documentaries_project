@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import ButtonTagAll from '../components/ButtonTagAll';
+import React from 'react';
+// import ButtonTagAll from '../components/ButtonTagAll';
 import { DocCard } from '../components/DocCard';
-import { Category } from '../components/Category';
 
 type Props = {
     movies: {
@@ -14,34 +13,14 @@ type Props = {
         plot: string;
         subcategories: string[];
     }[];
-    categories: string[];
-    displaySubcategory: string;
-    setSubcategory: (subcategory: string) => void;
+    selectedTag: string;
+    setTag: (subcategory: string) => void;
+    search: string;
+    selectedCategory: string;
 };
 
 export const MainPage: React.FC<Props> = (props: Props) => {
-    const [search, updateSearch] = useState('');
-    const [selectedCategory, setCategory] = useState('All');
-
-    // const [state, setState] = useState({ search: '', displayCategory: 'All', displaySubcategory: 'All' })
-    // const setCategory = (category: string) =>
-    //   setState({
-    //     ...state,
-    //     displayCategory: category
-    //   })
-    // const setSubcategory = (subcategory: string) =>
-    //   setState({
-    //     ...state,
-    //     displaySubcategory: subcategory
-    //   })
-    // const updateSearch = (event: string) =>
-    //   setState({
-    //     ...state,
-    //     search: event
-    //   })
-    // const { search, displayCategory, displaySubcategory } = state
-    const { movies, categories, setSubcategory, displaySubcategory } = props;
-    console.log(search);
+    const { movies, setTag, selectedTag, search, selectedCategory } = props;
     const filtered = movies.filter((elt) => {
         return (
             elt.topic.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
@@ -52,34 +31,23 @@ export const MainPage: React.FC<Props> = (props: Props) => {
     });
     return (
         <div className="main">
-            {categories.map((category, i) => {
-                return (
-                    <Category
-                        key={i}
-                        handleClick={setCategory}
-                        category={category}
-                        selectedCategory={selectedCategory}
-                    />
-                );
-            })}
-            <input type="text" value={search} onChange={(e) => updateSearch(e.target.value)} />
             <div className="doclist">
-                {displaySubcategory !== 'All' && (
+                {/* {selectedTag !== 'All' && (
                     <ButtonTagAll
-                        handleClick={setSubcategory}
+                        handleClick={setTag}
                         subcategory="All"
-                        currentSubcategory={displaySubcategory}
+                        currentSubcategory={selectedTag}
                     />
-                )}
+                )} */}
                 {filtered
                     .filter((elt) => {
                         return selectedCategory === elt.genre || selectedCategory === 'All';
                     })
                     .filter((elt) => {
-                        return elt.subcategories.includes(displaySubcategory) || displaySubcategory === 'All';
+                        return elt.subcategories.includes(selectedTag) || selectedTag === 'All';
                     })
                     .map((elt, i) => (
-                        <DocCard key={i} elt={elt} handleClick={setSubcategory} />
+                        <DocCard key={i} elt={elt} handleClick={setTag} />
                     ))}
             </div>
         </div>
