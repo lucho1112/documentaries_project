@@ -614,7 +614,6 @@ const dirtyData = [
     },
 ];
 
-console.log(dirtyData);
 // define a fn to clean dirtyData to cleanData; ie add id + slug
 // dirtyData = [item1, item2, item3, ...]
 // item1 = { topic: 'blabla' ... }
@@ -629,7 +628,6 @@ function serializeData(dirtyData) {
                 return typeof el === 'string' && el.length > 1;
             });
         }
-        console.log(item.subcategory);
         item.subcategories = serializeSubcategory(item.subcategory);
         delete item.subcategory;
         return item;
