@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { db } from '../firbase.config';
-// import { InputTag } from '../components/InputTag';
+
+type State = {
+    type: string;
+    title: string;
+    description: string;
+    category: string;
+    tags: string[];
+    duration: number;
+    language: string;
+    year: number;
+    link: string;
+};
 export const AddPost = () => {
-    const initialState = {
+    const initialState: State = {
         type: '',
         title: '',
         description: '',
@@ -25,29 +36,35 @@ export const AddPost = () => {
 
     const addTags = (event: any) => {
         if (event.key === 'Enter' && event.target.value !== '') {
-            const newTagData = [...newPost.tags, event.target.value];
             const newPostData = {
                 ...newPost,
-                newTagData,
+                tags: [...newPost.tags, event.target.value],
             };
             setNewPost(newPostData);
             event.target.value = '';
         }
     };
     const removeTags = (index: number) => {
-        const newTagData = [...newPost.tags.filter((tag) => newPost.tags.indexOf(tag) !== index)];
         const newPostData = {
             ...newPost,
-            newTagData,
+            tags: [...newPost.tags.filter((tag) => newPost.tags.indexOf(tag) !== index)],
         };
         setNewPost(newPostData);
-        // setTags([...tags.filter((tag) => tags.indexOf(tag) !== index)]);
     };
-    const handleSubmit = (event: { preventDefault: any }) => {
+    const handleClick = (event: { preventDefault: any }) => {
         event.preventDefault();
+        console.log(newPost);
         db.collection('data')
             .add({
-                newPost,
+                type: newPost.type,
+                title: newPost.title,
+                description: newPost.description,
+                category: newPost.category,
+                tags: newPost.tags,
+                duration: newPost.duration,
+                language: newPost.language,
+                year: newPost.year,
+                link: newPost.link,
             })
             .then((docRef) => {
                 console.log('Document written with ID: ', docRef.id);
@@ -57,17 +74,7 @@ export const AddPost = () => {
             });
     };
     return (
-        // genre: 'Documentaire',
-        // topic: 'Buster Keaton Un genie brise par Hollywood',
-        // mainspeaker: 'Buster Keaton',
-        // plot: "Rétrospective de la vie de Buster Keaton dans le contexte du cinéma Hollywoodien des 30's 40's 50's...",
-        // category: 'Cinéma',
-        // subcategory: 'Acteur                                       Hollywood                             Producteur',
-        // duration: 52,
-        // language: 'Fr',
-        // year: 2016,
-        // link: 'https://www.youtube.com/watch?v=Q4N0hIU3Wuw',
-        <form onSubmit={(event: any) => handleSubmit(event)}>
+        <form onSubmit={handleClick}>
             <input type="text" name="type" placeholder="type" onChange={handleChange} />
             <input type="text" name="title" placeholder="title" onChange={handleChange} />
             <input type="text" name="description" placeholder="description" onChange={handleChange} />
@@ -90,7 +97,9 @@ export const AddPost = () => {
             <input type="number" name="year" placeholder="year" onChange={handleChange} />
             <input type="link" name="link" placeholder="video link" onChange={handleChange} />
 
-            <button type="submit">Submit</button>
+            <button type="button" onClick={(event: any) => handleClick(event)}>
+                Submit
+            </button>
         </form>
     );
 };
