@@ -14,6 +14,7 @@ type State = {
     search: string;
     documentaries: any;
     error: null | string;
+    categories: string[];
 };
 
 const App = () => {
@@ -23,22 +24,32 @@ const App = () => {
         search: '',
         documentaries: [],
         error: null,
+        categories: [],
     };
     const [selectedTag, setTag] = useState(initialState.selectedTag);
     const [search, updateSearch] = useState(initialState.search);
     const [selectedCategory, setCategory] = useState(initialState.selectedCategory);
     const [documentaries, setDocumentaries] = useState(initialState.documentaries);
+    const [categories, setCategories] = useState(initialState.categories);
     const [error, setError] = useState(initialState.error);
 
     useEffect(() => {
         const fetchDocumentaries = async () => {
             const response = db.collection('data');
-            const data = await response.get();
-            const fetchedData: { [x: string]: any }[] = [];
-            data.forEach((item) => {
-                fetchedData.push({ ...item.data() });
+            await response.get().then((data) => {
+                const fetchedData: { [x: string]: any }[] = [];
+                data.forEach((item) => {
+                    fetchedData.push({ ...item.data() });
+                });
+                setDocumentaries(fetchedData);
+
+                const uniqueItems = (x: string, i: number, a: string) => a.indexOf(x) === i;
+                const docCategories = documentaries
+                    .map((prod: { category: string }) => prod.category)
+                    .filter(uniqueItems);
+                console.log(docCategories);
+                setCategories(docCategories);
             });
-            setDocumentaries(fetchedData);
         };
         fetchDocumentaries();
     }, []);

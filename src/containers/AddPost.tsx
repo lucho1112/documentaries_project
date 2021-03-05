@@ -72,9 +72,11 @@ export const AddPost = () => {
             .catch((error) => {
                 console.error('Error adding document: ', error);
             });
+        setNewPost(initialState);
+        document.querySelectorAll('input').forEach((input) => (input.value = ''));
     };
     return (
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleClick} id="add-post">
             <input type="text" name="type" placeholder="type" onChange={handleChange} />
             <input type="text" name="title" placeholder="title" onChange={handleChange} />
             <input type="text" name="description" placeholder="description" onChange={handleChange} />
