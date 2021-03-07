@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
 import { db } from '../firbase.config';
+import { DocumentaryType } from '../DataTypes';
 
-type State = {
-    type: string;
-    title: string;
-    description: string;
-    category: string;
-    tags: string[];
-    duration: number;
-    language: string;
-    year: number;
-    link: string;
-};
 export const AddPost = () => {
-    const initialState: State = {
+    const initialState: DocumentaryType = {
         type: '',
         title: '',
         description: '',
         category: '',
         tags: [],
-        duration: 0,
+        duration: '',
         language: '',
-        year: 0,
+        year: '',
         link: '',
     };
     const [newPost, setNewPost] = useState(initialState);

@@ -66,7 +66,7 @@ const App = () => {
             <Switch>
                 <Route exact path="/">
                     <MainPage
-                        movies={data}
+                        documentaries={documentaries}
                         selectedTag={selectedTag}
                         setTag={setTag}
                         search={search}
