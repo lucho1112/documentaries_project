@@ -14,7 +14,7 @@ export const DocCard: React.FC<Props> = (props: Props) => {
     return (
         <div className="card" id={doc.type}>
             <DocType genre={doc.type} className="card-type" />
-            <Link to={`/movie/${doc.id}`}>
+            <Link to={`/movie/${doc.slug}`}>
                 <h2 className="card-title">{doc.title}</h2>
             </Link>
             <div className="card-id">

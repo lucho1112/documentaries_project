@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../firbase.config';
 import { DocumentaryType } from '../DataTypes';
+import { slugify } from '../utils/helpers';
 
 export const AddPost = () => {
     const initialState: DocumentaryType = {
@@ -13,14 +14,22 @@ export const AddPost = () => {
         language: '',
         year: '',
         link: '',
+        slug: '',
     };
     const [newPost, setNewPost] = useState(initialState);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newPostData = {
+        let newPostData = {
             ...newPost,
             [event.target.name]: event.target.value,
         };
+        if (event.target.name === 'title') {
+            newPostData = {
+                ...newPost,
+                title: event.target.value,
+                slug: slugify(event.target.value),
+            };
+        }
         setNewPost(newPostData);
     };
 
@@ -41,9 +50,9 @@ export const AddPost = () => {
         };
         setNewPost(newPostData);
     };
-    const handleClick = (event: { preventDefault: any }) => {
+    const handleClick = (event: { preventDefault: () => void }) => {
         event.preventDefault();
-        console.log(newPost);
+        console.log(newPost.slug);
         db.collection('data')
             .add({
                 type: newPost.type,
@@ -55,6 +64,7 @@ export const AddPost = () => {
                 language: newPost.language,
                 year: newPost.year,
                 link: newPost.link,
+                slug: newPost.slug,
             })
             .then((docRef) => {
                 console.log('Document written with ID: ', docRef.id);
@@ -88,8 +98,9 @@ export const AddPost = () => {
             <input type="text" name="language" placeholder="language" onChange={handleChange} />
             <input type="number" name="year" placeholder="year" onChange={handleChange} />
             <input type="link" name="link" placeholder="video link" onChange={handleChange} />
+            <input type="text" name="stringtest" placeholder="stringtest" onChange={handleChange} />
 
-            <button type="button" onClick={(event: any) => handleClick(event)}>
+            <button type="button" onClick={(event) => handleClick(event)}>
                 Submit
             </button>
         </form>

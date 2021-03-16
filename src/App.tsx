@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { data, movieCategories } from './data/data';
+// import { data, movieCategories } from './data/data';
 import { Switch, Route } from 'react-router-dom';
 import { DocPage } from './containers/DocPage';
 import { MainPage } from './containers/MainPage';
@@ -10,7 +10,7 @@ import { db } from './firbase.config';
 
 type State = {
     selectedTag: string;
-    selectedCategory: string;
+    selectedType: string;
     search: string;
     documentaries: any;
     error: null | string;
@@ -20,7 +20,7 @@ type State = {
 const App = () => {
     const initialState: State = {
         selectedTag: 'All',
-        selectedCategory: 'All',
+        selectedType: 'All',
         search: '',
         documentaries: [],
         error: null,
@@ -28,9 +28,9 @@ const App = () => {
     };
     const [selectedTag, setTag] = useState(initialState.selectedTag);
     const [search, updateSearch] = useState(initialState.search);
-    const [selectedCategory, setCategory] = useState(initialState.selectedCategory);
+    const [selectedType, setType] = useState(initialState.selectedType);
     const [documentaries, setDocumentaries] = useState(initialState.documentaries);
-    const [categories, setCategories] = useState(initialState.categories);
+    const [types, setTypes] = useState(initialState.categories);
     const [error, setError] = useState(initialState.error);
 
     useEffect(() => {
@@ -42,13 +42,11 @@ const App = () => {
                     fetchedData.push({ ...item.data() });
                 });
                 setDocumentaries(fetchedData);
-
-                const uniqueItems = (x: string, i: number, a: string) => a.indexOf(x) === i;
-                const docCategories = documentaries
-                    .map((prod: { category: string }) => prod.category)
-                    .filter(uniqueItems);
-                console.log(docCategories);
-                setCategories(docCategories);
+                console.log('data fetched');
+                const uniqueItems = (x: string, i: number, a: string[]) => a.indexOf(x) === i;
+                const docTypes = fetchedData.map((documentary) => documentary.type).filter(uniqueItems);
+                console.log(docTypes);
+                setTypes(docTypes);
             });
         };
         fetchDocumentaries();
@@ -58,8 +56,8 @@ const App = () => {
             <AddPost />
             <NavBar
                 updateSearch={updateSearch}
-                categories={movieCategories}
-                setCategory={setCategory}
+                types={types}
+                setType={setType}
                 selectedTag={selectedTag}
                 setTag={setTag}
             />
@@ -70,11 +68,11 @@ const App = () => {
                         selectedTag={selectedTag}
                         setTag={setTag}
                         search={search}
-                        selectedCategory={selectedCategory}
+                        selectedType={selectedType}
                     />
                 </Route>
                 <Route path="/movie/:i">
-                    <DocPage movies={data} handleClick={setTag} />
+                    <DocPage documentaries={documentaries} handleClick={setTag} />
                 </Route>
             </Switch>
         </div>

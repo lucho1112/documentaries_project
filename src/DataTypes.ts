@@ -9,5 +9,6 @@ export type DocumentaryType = {
     duration: string;
     language: string;
     link: string;
+    slug?: string;
 };
 export type CategoriesTypes = string[];

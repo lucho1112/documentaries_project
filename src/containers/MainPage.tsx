@@ -5,14 +5,14 @@ import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     selectedTag: string;
-    setTag: (subcategory: string) => void;
+    setTag: (tag: string) => void;
     search: string;
-    selectedCategory: string;
+    selectedType: string;
     documentaries: DocumentaryType[];
 };
 
 export const MainPage: React.FC<Props> = (props: Props) => {
-    const { setTag, selectedTag, search, selectedCategory, documentaries } = props;
+    const { setTag, selectedTag, search, selectedType, documentaries } = props;
     const filtered = documentaries.filter((doc) => {
         return (
             doc.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
@@ -24,16 +24,9 @@ export const MainPage: React.FC<Props> = (props: Props) => {
     return (
         <div className="main">
             <div className="doclist">
-                {/* {selectedTag !== 'All' && (
-                    <ButtonTagAll
-                        handleClick={setTag}
-                        subcategory="All"
-                        currentSubcategory={selectedTag}
-                    />
-                )} */}
                 {filtered
                     .filter((doc) => {
-                        return selectedCategory === doc.type || selectedCategory === 'All';
+                        return selectedType === doc.type || selectedType === 'All';
                     })
                     .filter((doc) => {
                         return doc.tags.includes(selectedTag) || selectedTag === 'All';
