@@ -3,41 +3,33 @@ import '../App.css';
 import { DocType } from '../components/DocType';
 import { DocVideo } from '../components/DocVideo';
 import { Tag } from '../components/Tag';
+import { DocumentaryType } from '../DataTypes';
 
 type Props = {
-    movies: {
-        genre: string;
-        topic: string;
-        link: string;
-        category: string;
-        year: string;
-        duration: string;
-        plot: string;
-        subcategories: string[];
-    }[];
+    documentaries: DocumentaryType[];
     handleClick: (tag: string) => void;
 };
 
 export const DocPage: React.FC<Props> = (props: Props) => {
-    const { movies, handleClick } = props;
+    const { documentaries, handleClick } = props;
 
     let docCard;
-    movies.map((elt, i) => {
-        if ('/movie/' + i === location.pathname) {
+    documentaries.map((doc, i) => {
+        if ('/movie/' + doc.slug === location.pathname) {
             docCard = (
                 <div>
-                    <DocType genre={elt.genre} className="card-type" />
+                    <DocType genre={doc.type} className="card-type" />
 
-                    <h2 className="card-title">{elt.topic}</h2>
-                    <DocVideo link={elt.link} />
+                    <h2 className="card-title">{doc.title}</h2>
+                    <DocVideo link={doc.link} />
 
                     <div className="card-id">
-                        <span>{elt.category}</span>
-                        <span>{elt.year}</span>
-                        <span>{elt.duration} minutes</span>
+                        <span>{doc.category}</span>
+                        <span>{doc.year}</span>
+                        <span>{doc.duration} minutes</span>
                     </div>
-                    <p className="card-sum">{elt.plot}</p>
-                    {elt.subcategories.map((tag, i) => (
+                    <p className="card-sum">{doc.description}</p>
+                    {doc.tags.map((tag, i) => (
                         <Tag handleClick={handleClick} tag={tag} key={i} />
                     ))}
                 </div>

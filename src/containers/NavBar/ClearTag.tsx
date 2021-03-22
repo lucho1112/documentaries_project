@@ -1,16 +1,16 @@
 import React from 'react';
 
 type Props = {
-    handleClick: (subcategory: string) => void;
-    subcategory: string;
+    handleClick: (tag: string) => void;
+    tag: string;
     selectedTag: string;
 };
 
 export const ClearTag: React.FC<Props> = (props: Props) => {
-    const { handleClick, subcategory, selectedTag } = props;
+    const { handleClick, tag, selectedTag } = props;
 
     return (
-        <button className="tag-clearer" onClick={() => handleClick(subcategory)}>
+        <button className="tag-clearer" onClick={() => handleClick(tag)}>
             {selectedTag} X
         </button>
     );

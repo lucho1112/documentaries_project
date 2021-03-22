@@ -1,53 +1,37 @@
 import React from 'react';
-// import ButtonTagAll from '../components/ButtonTagAll';
 import { DocCard } from '../components/DocCard';
+import { DocumentaryType } from '../DataTypes';
 
 type Props = {
-    movies: {
-        genre: string;
-        topic: string;
-        id: string;
-        category: string;
-        year: string;
-        duration: string;
-        plot: string;
-        subcategories: string[];
-    }[];
     selectedTag: string;
-    setTag: (subcategory: string) => void;
+    setTag: (tag: string) => void;
     search: string;
-    selectedCategory: string;
+    selectedType: string;
+    documentaries: DocumentaryType[];
 };
 
 export const MainPage: React.FC<Props> = (props: Props) => {
-    const { movies, setTag, selectedTag, search, selectedCategory } = props;
-    const filtered = movies.filter((elt) => {
+    const { setTag, selectedTag, search, selectedType, documentaries } = props;
+    const filtered = documentaries.filter((doc) => {
         return (
-            elt.topic.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-            elt.genre.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
-            elt.year.toString().indexOf(search.toLowerCase()) !== -1 ||
-            elt.plot.toLowerCase().indexOf(search.toLowerCase()) !== -1
+            doc.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+            doc.type.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
+            doc.year.toString().indexOf(search.toLowerCase()) !== -1 ||
+            doc.description.toLowerCase().indexOf(search.toLowerCase()) !== -1
         );
     });
     return (
         <div className="main">
             <div className="doclist">
-                {/* {selectedTag !== 'All' && (
-                    <ButtonTagAll
-                        handleClick={setTag}
-                        subcategory="All"
-                        currentSubcategory={selectedTag}
-                    />
-                )} */}
                 {filtered
-                    .filter((elt) => {
-                        return selectedCategory === elt.genre || selectedCategory === 'All';
+                    .filter((doc) => {
+                        return selectedType === doc.type || selectedType === 'All';
                     })
-                    .filter((elt) => {
-                        return elt.subcategories.includes(selectedTag) || selectedTag === 'All';
+                    .filter((doc) => {
+                        return doc.tags.includes(selectedTag) || selectedTag === 'All';
                     })
-                    .map((elt, i) => (
-                        <DocCard key={i} elt={elt} handleClick={setTag} />
+                    .map((doc, i) => (
+                        <DocCard key={i} doc={doc} handleClick={setTag} />
                     ))}
             </div>
         </div>
