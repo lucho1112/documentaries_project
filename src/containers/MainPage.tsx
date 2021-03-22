@@ -1,5 +1,4 @@
 import React from 'react';
-// import ButtonTagAll from '../components/ButtonTagAll';
 import { DocCard } from '../components/DocCard';
 import { DocumentaryType } from '../DataTypes';
 

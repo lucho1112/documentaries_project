@@ -1,6 +1,6 @@
 import React from 'react';
 import { SearchBar } from './SearchBar';
-import { Categories } from './Categories';
+import { Types } from './Types';
 import { ClearTag } from './ClearTag';
 
 type Props = {
@@ -17,7 +17,7 @@ export const NavBar: React.FC<Props> = (props: Props) => {
         <div className="navbar">
             <SearchBar updateSearch={updateSearch} />
             {selectedTag !== 'All' && <ClearTag handleClick={setTag} tag="All" selectedTag={selectedTag} />}
-            <Categories types={types} setType={setType} />
+            <Types types={types} setType={setType} />
         </div>
     );
 };

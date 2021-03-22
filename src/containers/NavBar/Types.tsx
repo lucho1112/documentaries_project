@@ -6,7 +6,7 @@ type Props = {
     setType: (type: string) => void;
 };
 
-export const Categories: React.FC<Props> = (props: Props) => {
+export const Types: React.FC<Props> = (props: Props) => {
     const { types, setType } = props;
     const history = useHistory();
     const handleClick = (type: string) => {

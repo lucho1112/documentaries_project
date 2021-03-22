@@ -7,6 +7,7 @@ import { MainPage } from './containers/MainPage';
 import { NavBar } from './containers/NavBar/NavBar';
 import { AddPost } from './containers/AddPost';
 import { db } from './firbase.config';
+import { DocumentaryType } from './DataTypes';
 
 type State = {
     selectedTag: string;
@@ -37,14 +38,12 @@ const App = () => {
         const fetchDocumentaries = async () => {
             const response = db.collection('data');
             await response.get().then((data) => {
-                const fetchedData: { [x: string]: any }[] = [];
-                data.forEach((item) => {
-                    fetchedData.push({ ...item.data() });
-                });
+                const fetchedData: any = [];
+                data.forEach((item) => fetchedData.push({ ...item.data() }));
                 setDocumentaries(fetchedData);
                 console.log('data fetched');
                 const uniqueItems = (x: string, i: number, a: string[]) => a.indexOf(x) === i;
-                const docTypes = fetchedData.map((documentary) => documentary.type).filter(uniqueItems);
+                const docTypes = fetchedData.map((documentary: { type: any }) => documentary.type).filter(uniqueItems);
                 console.log(docTypes);
                 setTypes(docTypes);
             });
