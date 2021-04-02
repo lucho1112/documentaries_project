@@ -4,14 +4,14 @@ import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     selectedTag: string;
-    setTag: (tag: string) => void;
+    setFilter: any;
     search: string;
     selectedType: string;
     documentaries: DocumentaryType[];
 };
 
 export const MainPage: React.FC<Props> = (props: Props) => {
-    const { setTag, selectedTag, search, selectedType, documentaries } = props;
+    const { selectedTag, search, selectedType, documentaries, setFilter } = props;
     const filtered = documentaries.filter((doc) => {
         return (
             doc.title.toLowerCase().indexOf(search.toLowerCase()) !== -1 ||
@@ -31,7 +31,7 @@ export const MainPage: React.FC<Props> = (props: Props) => {
                         return doc.tags.includes(selectedTag) || selectedTag === 'All';
                     })
                     .map((doc, i) => (
-                        <DocCard key={i} doc={doc} handleClick={setTag} />
+                        <DocCard key={i} doc={doc} setFilter={setFilter} />
                     ))}
             </div>
         </div>

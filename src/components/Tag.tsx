@@ -2,16 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {
-    handleClick: (tag: string) => void;
+    setFilter: any;
     tag: string;
     key: number;
 };
 
 export const Tag: React.FC<Props> = (props: Props) => {
-    const { handleClick, tag } = props;
+    const { tag, setFilter } = props;
     return (
         <Link to="/">
-            <button onClick={() => handleClick(tag)}>{tag}</button>
+            <button onClick={() => setFilter('selectedTag', tag)}>{tag}</button>
         </Link>
     );
 };

@@ -7,18 +7,18 @@ import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     documentaries: DocumentaryType[];
-    handleClick: (tag: string) => void;
+    setFilter: any;
 };
 
 export const DocPage: React.FC<Props> = (props: Props) => {
-    const { documentaries, handleClick } = props;
+    const { documentaries, setFilter } = props;
 
     let docCard;
     documentaries.map((doc, i) => {
         if ('/movie/' + doc.slug === location.pathname) {
             docCard = (
                 <div>
-                    <DocType genre={doc.type} className="card-type" />
+                    <DocType type={doc.type} setFilter={setFilter} />
 
                     <h2 className="card-title">{doc.title}</h2>
                     <DocVideo link={doc.link} />
@@ -30,7 +30,7 @@ export const DocPage: React.FC<Props> = (props: Props) => {
                     </div>
                     <p className="card-sum">{doc.description}</p>
                     {doc.tags.map((tag, i) => (
-                        <Tag handleClick={handleClick} tag={tag} key={i} />
+                        <Tag tag={tag} key={i} setFilter={setFilter} />
                     ))}
                 </div>
             );

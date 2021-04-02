@@ -1,23 +1,38 @@
 import React from 'react';
+import './NavBar.scss';
 import { SearchBar } from './SearchBar';
-import { Types } from './Types';
-import { ClearTag } from './ClearTag';
+import { SelectedType } from './SelectedType';
+import { SelectedTag } from './SelectedTag';
+import { SelectedFilter } from './SelectedFilter';
 
 type Props = {
     updateSearch: (e: string) => void;
-    types: string[];
-    setType: (Type: string) => void;
+    setFilter: any;
+    setType: (type: string) => void;
     selectedTag: string;
     setTag: (tag: string) => void;
+    selectedType: string;
+    activeFilters: {
+        selectedTag: string;
+        selectedType: string;
+    };
 };
 
 export const NavBar: React.FC<Props> = (props: Props) => {
-    const { updateSearch, types, setType, selectedTag, setTag } = props;
+    const { updateSearch, setType, selectedType, selectedTag, setTag, activeFilters, setFilter } = props;
+
+    // for (const [key, value] of Object.entries(activeFilters)) {
+    //     console.log(`${key}: ${value}`);
+    //     value !== '' && `<p></p>`
+    // }
     return (
-        <div className="navbar">
+        <div className="container">
             <SearchBar updateSearch={updateSearch} />
-            {selectedTag !== 'All' && <ClearTag handleClick={setTag} tag="All" selectedTag={selectedTag} />}
-            <Types types={types} setType={setType} />
+            {selectedTag !== 'All' && <SelectedTag setTag={setTag} selectedTag={selectedTag} />}
+            {selectedType !== 'All' && <SelectedType setType={setType} selectedType={selectedType} />}
+            {Object.entries(activeFilters).map(([filter, value]) => {
+                return value !== '' && <SelectedFilter filter={filter} value={value} setFilter={setFilter} />;
+            })}
         </div>
     );
 };
