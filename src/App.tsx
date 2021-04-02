@@ -9,8 +9,6 @@ import { AddPost } from './containers/AddPost';
 import { db } from './firbase.config';
 
 type State = {
-    selectedTag: string;
-    selectedType: string;
     search: string;
     documentaries: any;
     error: null | string;
@@ -23,8 +21,6 @@ type State = {
 
 const App = () => {
     const initialState: State = {
-        selectedTag: 'All',
-        selectedType: 'All',
         search: '',
         documentaries: [],
         error: null,
@@ -34,9 +30,7 @@ const App = () => {
             selectedType: '',
         },
     };
-    const [selectedTag, setTag] = useState(initialState.selectedTag);
     const [search, updateSearch] = useState(initialState.search);
-    const [selectedType, setType] = useState(initialState.selectedType);
     const [documentaries, setDocumentaries] = useState(initialState.documentaries);
     const [error, setError] = useState(initialState.error);
     const [activeFilters, setFilter] = useState(initialState.activeFilter);
@@ -60,23 +54,15 @@ const App = () => {
     }, []);
     return (
         <div className="content">
-            <NavBar
-                updateSearch={updateSearch}
-                setType={setType}
-                selectedTag={selectedTag}
-                selectedType={selectedType}
-                setTag={setTag}
-                activeFilters={activeFilters}
-                setFilter={changeFilter}
-            />
+            <NavBar updateSearch={updateSearch} activeFilters={activeFilters} setFilter={changeFilter} />
             <Switch>
                 <Route exact path="/">
                     <MainPage
                         documentaries={documentaries}
-                        selectedTag={selectedTag}
+                        selectedTag={activeFilters.selectedTag}
                         setFilter={changeFilter}
                         search={search}
-                        selectedType={selectedType}
+                        selectedType={activeFilters.selectedType}
                     />
                 </Route>
                 <Route path="/movie/:i">

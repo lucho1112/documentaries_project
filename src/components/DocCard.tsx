@@ -6,7 +6,7 @@ import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     doc: DocumentaryType;
-    setFilter: any;
+    setFilter: (key: string, value: string) => void;
 };
 export const DocCard: React.FC<Props> = (props: Props) => {
     const { doc, setFilter } = props;

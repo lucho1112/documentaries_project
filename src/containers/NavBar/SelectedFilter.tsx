@@ -1,7 +1,7 @@
 import React from 'react';
 
 type Props = {
-    setFilter: any;
+    setFilter: (key: string, value: string) => void;
     value: string;
     filter: string;
 };

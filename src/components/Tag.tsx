@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 type Props = {
-    setFilter: any;
+    setFilter: (key: string, value: string) => void;
     tag: string;
     key: number;
 };

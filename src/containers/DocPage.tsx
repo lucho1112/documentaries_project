@@ -7,7 +7,7 @@ import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     documentaries: DocumentaryType[];
-    setFilter: any;
+    setFilter: (key: string, value: string) => void;
 };
 
 export const DocPage: React.FC<Props> = (props: Props) => {
