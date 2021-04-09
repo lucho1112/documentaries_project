@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 // import './App.css';
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
@@ -7,24 +7,23 @@ import { MainPage } from './containers/MainPage';
 import { NavBar } from './containers/NavBar/NavBar';
 import { AddPost } from './containers/AddPost';
 import { db } from './firbase.config';
+// import { DocumentaryType } from './DataTypes';
 
 type State = {
     search: string;
     documentaries: any;
     error: null | string;
-    categories: string[];
     activeFilter: {
         selectedTag: string;
         selectedType: string;
     };
 };
 
-const App = () => {
+const App: FunctionComponent = () => {
     const initialState: State = {
         search: '',
         documentaries: [],
         error: null,
-        categories: [],
         activeFilter: {
             selectedTag: '',
             selectedType: '',
@@ -32,10 +31,10 @@ const App = () => {
     };
     const [search, updateSearch] = useState(initialState.search);
     const [documentaries, setDocumentaries] = useState(initialState.documentaries);
-    const [error, setError] = useState(initialState.error);
+    // const [error, setError] = useState(initialState.error);
     const [activeFilters, setFilter] = useState(initialState.activeFilter);
 
-    const changeFilter = (key: any, value: any) => {
+    const changeFilter = (key: string, value: string) => {
         const newFilter = { ...activeFilters, [key]: value };
         setFilter(newFilter);
     };

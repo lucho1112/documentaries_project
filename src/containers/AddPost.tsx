@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { db } from '../firbase.config';
 import { DocumentaryType } from '../DataTypes';
 import { slugify } from '../utils/helpers';
 
-export const AddPost = () => {
+export const AddPost: FunctionComponent = () => {
     const initialState: DocumentaryType = {
         type: '',
         title: '',

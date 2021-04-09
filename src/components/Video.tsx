@@ -2,7 +2,7 @@ import React from 'react';
 
 type Props = { link: string };
 
-export const DocVideo: React.FC<Props> = (props: Props) => {
+export const Video: React.FC<Props> = (props: Props) => {
     const { link } = props;
     let embed;
     if (link.includes('youtube')) {

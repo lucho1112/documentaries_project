@@ -1,5 +1,5 @@
 import React from 'react';
-import { DocCard } from '../components/DocCard';
+import { Card } from '../components/Card';
 import { DocumentaryType } from '../DataTypes';
 
 type Props = {
@@ -35,7 +35,7 @@ export const MainPage: React.FC<Props> = (props: Props) => {
         <div className="main">
             <div className="doclist">
                 {posts.map((doc, i) => (
-                    <DocCard key={i} doc={doc} setFilter={setFilter} />
+                    <Card key={i} doc={doc} setFilter={setFilter} />
                 ))}
             </div>
         </div>

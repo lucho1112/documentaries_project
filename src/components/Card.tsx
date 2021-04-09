@@ -8,7 +8,7 @@ type Props = {
     doc: DocumentaryType;
     setFilter: (key: string, value: string) => void;
 };
-export const DocCard: React.FC<Props> = (props: Props) => {
+export const Card: React.FC<Props> = (props: Props) => {
     const { doc, setFilter } = props;
 
     return (
