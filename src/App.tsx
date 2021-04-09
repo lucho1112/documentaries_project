@@ -17,6 +17,7 @@ type State = {
         selectedTag: string;
         selectedType: string;
     };
+    isModalOpen: boolean;
 };
 
 const App: FunctionComponent = () => {
@@ -28,12 +29,21 @@ const App: FunctionComponent = () => {
             selectedTag: '',
             selectedType: '',
         },
+        isModalOpen: false,
     };
     const [search, updateSearch] = useState(initialState.search);
     const [documentaries, setDocumentaries] = useState(initialState.documentaries);
     // const [error, setError] = useState(initialState.error);
     const [activeFilters, setFilter] = useState(initialState.activeFilter);
+    const [isModalOpen, setModal] = useState(initialState.isModalOpen);
 
+    const openModal = () => {
+        setModal(true);
+    };
+
+    const closeModal = () => {
+        setModal(false);
+    };
     const changeFilter = (key: string, value: string) => {
         const newFilter = { ...activeFilters, [key]: value };
         setFilter(newFilter);
@@ -53,7 +63,12 @@ const App: FunctionComponent = () => {
     }, []);
     return (
         <div className="content">
-            <NavBar updateSearch={updateSearch} activeFilters={activeFilters} setFilter={changeFilter} />
+            <NavBar
+                updateSearch={updateSearch}
+                activeFilters={activeFilters}
+                setFilter={changeFilter}
+                openModal={openModal}
+            />
             <Switch>
                 <Route exact path="/">
                     <MainPage
@@ -68,7 +83,7 @@ const App: FunctionComponent = () => {
                     <DocPage documentaries={documentaries} setFilter={changeFilter} />
                 </Route>
             </Switch>
-            <AddPost />
+            <AddPost closeModal={closeModal} isModalOpen={isModalOpen} />
         </div>
     );
 };

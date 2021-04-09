@@ -2,8 +2,15 @@ import React, { FunctionComponent, useState } from 'react';
 import { db } from '../firbase.config';
 import { DocumentaryType } from '../DataTypes';
 import { slugify } from '../utils/helpers';
+import './AddPost.scss';
 
-export const AddPost: FunctionComponent = () => {
+type Props = {
+    closeModal: () => void;
+    isModalOpen: boolean;
+};
+
+export const AddPost: React.FC<Props> = (props: Props) => {
+    const { closeModal, isModalOpen } = props;
     const initialState: DocumentaryType = {
         type: '',
         title: '',
@@ -75,34 +82,94 @@ export const AddPost: FunctionComponent = () => {
         setNewPost(initialState);
         document.querySelectorAll('input').forEach((input) => (input.value = ''));
     };
+    if (!isModalOpen) {
+        return null;
+    }
     return (
-        <form onSubmit={handleClick} id="add-post">
-            <input type="text" name="type" placeholder="type" onChange={handleChange} />
-            <input type="text" name="title" placeholder="title" onChange={handleChange} />
-            <input type="text" name="description" placeholder="description" onChange={handleChange} />
-            <input type="text" name="category" placeholder="category" onChange={handleChange} />
-            <div className="tags-input">
-                <ul>
-                    {newPost.tags.map((tag, index) => (
-                        <li key={index}>
-                            <span>{tag}</span>
-                            <i className="material-icons" onClick={() => removeTags(index)}>
-                                close
-                            </i>
-                        </li>
-                    ))}
-                </ul>
-                <input type="text" onKeyUp={(event) => addTags(event)} placeholder="Press enter to add tags" />
+        <div className="addPostContainer">
+            <div className="addPostContainer__close" onClick={() => closeModal()}>
+                close
             </div>
-            <input type="number" name="duration" placeholder="duration" onChange={handleChange} />
-            <input type="text" name="language" placeholder="language" onChange={handleChange} />
-            <input type="number" name="year" placeholder="year" onChange={handleChange} />
-            <input type="link" name="link" placeholder="video link" onChange={handleChange} />
-            <input type="text" name="stringtest" placeholder="stringtest" onChange={handleChange} />
+            <form onSubmit={handleClick} id="add-post" className="addPostForm">
+                <input
+                    className="addPostForm__input"
+                    type="text"
+                    name="type"
+                    placeholder="type"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="text"
+                    name="title"
+                    placeholder="title"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="text"
+                    name="description"
+                    placeholder="description"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="text"
+                    name="category"
+                    placeholder="category"
+                    onChange={handleChange}
+                />
+                <div className="tags-input">
+                    <ul>
+                        {newPost.tags.map((tag, index) => (
+                            <li key={index}>
+                                <span>{tag}</span>
+                                <i className="material-icons" onClick={() => removeTags(index)}>
+                                    close
+                                </i>
+                            </li>
+                        ))}
+                    </ul>
+                    <input
+                        className="addPostForm__input"
+                        type="text"
+                        onKeyUp={(event) => addTags(event)}
+                        placeholder="Press enter to add tags"
+                    />
+                </div>
+                <input
+                    className="addPostForm__input"
+                    type="number"
+                    name="duration"
+                    placeholder="duration"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="text"
+                    name="language"
+                    placeholder="language"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="number"
+                    name="year"
+                    placeholder="year"
+                    onChange={handleChange}
+                />
+                <input
+                    className="addPostForm__input"
+                    type="link"
+                    name="link"
+                    placeholder="video link"
+                    onChange={handleChange}
+                />
 
-            <button type="button" onClick={(event) => handleClick(event)}>
-                Submit
-            </button>
-        </form>
+                <button className="addPostForm__submit" type="button" onClick={(event) => handleClick(event)}>
+                    Submit
+                </button>
+            </form>
+        </div>
     );
 };

@@ -10,10 +10,11 @@ type Props = {
         selectedTag: string;
         selectedType: string;
     };
+    openModal: () => void;
 };
 
 export const NavBar: React.FC<Props> = (props: Props) => {
-    const { updateSearch, activeFilters, setFilter } = props;
+    const { updateSearch, activeFilters, setFilter, openModal } = props;
 
     return (
         <div className="container">
@@ -21,6 +22,7 @@ export const NavBar: React.FC<Props> = (props: Props) => {
             {Object.entries(activeFilters).map(([filter, value]) => {
                 return value !== '' && <SelectedFilter filter={filter} value={value} setFilter={setFilter} />;
             })}
+            <div onClick={() => openModal()}>Add New Post</div>
         </div>
     );
 };
