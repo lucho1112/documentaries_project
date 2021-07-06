@@ -1,8 +1,57 @@
+body {
+    position: relative;
+}
+
 .addPostContainer {
     position: absolute;
-    display: block;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: transparent;
-    opacity: 0.6;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .addPost {
+        
+        display: block;
+        background-color: white;
+        border: 1px solid black;
+        max-width: 500px;
+        width: 100%;
+        padding: 15px;
+        &__close {
+            display: block;
+            position: relative;
+            width: 20px;
+            height: 20px;
+            margin-left: auto;
+            &:before, &:after {
+                position: absolute;
+                left: 15px;
+                content: ' ';
+                height: 15px;
+                width: 2px;
+                background-color: #333;
+              }
+              &:before {
+                transform: rotate(45deg);
+              }
+              &:after {
+                transform: rotate(-45deg);
+              }
+        }
+        &__form {
+            
+            width: 100%;
+            display: inline-block;
+            &__input {
+                
+                display: inline-block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    }
 }
