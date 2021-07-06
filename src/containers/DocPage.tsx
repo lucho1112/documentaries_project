@@ -1,27 +1,27 @@
 import React from 'react';
 import '../App.css';
 import { DocType } from '../components/DocType';
-import { DocVideo } from '../components/DocVideo';
+import { Video } from '../components/Video';
 import { Tag } from '../components/Tag';
 import { DocumentaryType } from '../DataTypes';
 
 type Props = {
     documentaries: DocumentaryType[];
-    handleClick: (tag: string) => void;
+    setFilter: (key: string, value: string) => void;
 };
 
 export const DocPage: React.FC<Props> = (props: Props) => {
-    const { documentaries, handleClick } = props;
+    const { documentaries, setFilter } = props;
 
-    let docCard;
+    let Card;
     documentaries.map((doc, i) => {
         if ('/movie/' + doc.slug === location.pathname) {
-            docCard = (
-                <div>
-                    <DocType genre={doc.type} className="card-type" />
+            Card = (
+                <div key={i}>
+                    <DocType type={doc.type} setFilter={setFilter} />
 
                     <h2 className="card-title">{doc.title}</h2>
-                    <DocVideo link={doc.link} />
+                    <Video link={doc.link} />
 
                     <div className="card-id">
                         <span>{doc.category}</span>
@@ -30,12 +30,12 @@ export const DocPage: React.FC<Props> = (props: Props) => {
                     </div>
                     <p className="card-sum">{doc.description}</p>
                     {doc.tags.map((tag, i) => (
-                        <Tag handleClick={handleClick} tag={tag} key={i} />
+                        <Tag tag={tag} key={i} setFilter={setFilter} />
                     ))}
                 </div>
             );
         }
     });
 
-    return <div>{docCard}</div>;
+    return <div>{Card}</div>;
 };

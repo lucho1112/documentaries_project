@@ -1,17 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-type Props = { genre: string; className: string };
+type Props = { type: string; setFilter: (key: string, value: string) => void };
 
 export const DocType: React.FC<Props> = (props: Props) => {
-    const { genre } = props;
-    const genreOf = genre === 'Documentaire' ? 'red' : 'blue';
-    const spanStyle = {
-        backgroundColor: genreOf,
-    };
-
+    const { type, setFilter } = props;
     return (
-        <p>
-            <span style={spanStyle}>{genre}</span>
-        </p>
+        <Link to="/">
+            <p onClick={() => setFilter('selectedType', type)}>{type}</p>
+        </Link>
     );
 };

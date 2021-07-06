@@ -16,5 +16,5 @@ export const SearchBar: React.FC<Props> = (props: Props) => {
             }
         }
     };
-    return <input type="text" onKeyPress={handleKeyPress} />;
+    return <input className="search-input" type="text" onKeyPress={handleKeyPress} />;
 };
